@@ -5,7 +5,9 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import com.devsuperior.dslist.entities.GameList;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface GameListRepository extends JpaRepository<GameList, Long> {
 
 	@Modifying
