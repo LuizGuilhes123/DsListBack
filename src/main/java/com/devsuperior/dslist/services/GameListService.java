@@ -17,16 +17,21 @@ public class GameListService {
 
 	@Autowired
 	private GameListRepository gameListRepository;
-	
+
 	@Autowired
 	private GameRepository gameRepository;
-	
+
 	@Transactional(readOnly = true)
 	public List<GameListDTO> findAll() {
 		List<GameList> result = gameListRepository.findAll();
-		return result.stream().map(GameListDTO::new).toList();
+		return result.stream().map(entity -> {
+			GameListDTO dto = new GameListDTO();
+			dto.setId(entity.getId());
+			dto.setName(entity.getName());
+			return dto;
+		}).toList();
 	}
-	
+
 	@Transactional
 	public void move(Long listId, int sourceIndex, int destinationIndex) {
 
@@ -46,7 +51,9 @@ public class GameListService {
 	@Transactional(readOnly = true)
 	public GameListDTO findById(Long id) {
 		GameList entity = gameListRepository.findById(id).get();
-		return new GameListDTO(entity);
+		GameListDTO dto = new GameListDTO();
+		dto.setId(entity.getId());
+		dto.setName(entity.getName());
+		return dto;
 	}
 }
-

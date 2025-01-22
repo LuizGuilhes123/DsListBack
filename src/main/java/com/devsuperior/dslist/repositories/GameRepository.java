@@ -7,7 +7,9 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.devsuperior.dslist.entities.Game;
 import com.devsuperior.dslist.projections.GameMinProjection;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface GameRepository extends JpaRepository<Game, Long> {
 
 	@Query(nativeQuery = true, value = """
